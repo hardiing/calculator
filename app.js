@@ -1,22 +1,62 @@
 const display = document.getElementById("currentScreen");
 const numberButtons = document.querySelectorAll(".numberBtn");
-let firstOperand = 0;
+const opButtons = document.querySelectorAll(".opBtn");
+const equalsButton = document.querySelector(".equalsBtn");
+const clearButton = document.querySelector(".clearBtn");
+let firstOperand = "";
+let secondOperand = "";
+let currentOperator = "";
 
 numberButtons.forEach((button) =>
     button.addEventListener("click", () => 
         appendNumber(button.textContent))
     )
 
+opButtons.forEach((button) =>
+    button.addEventListener("click", () =>
+        setOperation(button.textContent))
+    )
+
+equalsButton.addEventListener("click", equals);
+clearButton.addEventListener("click", clear);
+
 function appendNumber(number) {
     if (display.textContent === "0") {
         resetScreen()
     }
     display.textContent += number;
-    firstOperand = display.textContent;
 }
 
 function resetScreen() {
     display.textContent = "";
+}
+
+function clear() {
+    firstOperand = ""
+    secondOperand = ""
+    currentOperator = ""
+    resetScreen();
+}
+
+function setOperation(operator) {
+    firstOperand = display.textContent;
+    currentOperator = operator;
+    resetScreen();
+}
+
+function equals() {
+    secondOperand = display.textContent;
+    if (currentOperator === "/" && secondOperand === "0") {
+        display.textContent = "You can't divide by zero!!!"
+    } else {
+        display.textContent = roundResult(operate(currentOperator, firstOperand, secondOperand));
+    }
+    firstOperand = display.textContent;
+    secondOperand = "";
+}
+
+function roundResult(number) {
+    return Math.round(number * 1000) / 1000;
 }
 
 function add(a, b) {
@@ -36,16 +76,21 @@ function divide(a, b) {
 }
 
 function operate(operator, a, b) {
-    if (operator == add) {
-        add(a, b);
+    a = Number(a);
+    b = Number(b);
+    console.log(a);
+    console.log(operator);
+    console.log(b);
+    if (operator === "+") {
+        return add(a, b);
     }
-    else if (operator == subtract) {
-        subtract(a, b);
+    else if (operator === "-") {
+        return subtract(a, b);
     }
-    else if (operator == multiply) {
-        multiply(a, b);
+    else if (operator === "*") {
+        return multiply(a, b);
     }
-    else if (operator == divide) {
-        divide(a, b);
+    else if (operator === "/") {
+        return divide(a, b);
     }
 }
