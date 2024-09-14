@@ -18,6 +18,8 @@ let buttonDiv = document.getElementById("div")
 let buttonEqual = document.getElementById("equal")
 let buttonClear = document.getElementById("clear")
 
+let display = document.getElementById("display")
+
 
 function add(x, y) {
     return x + y
