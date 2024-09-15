@@ -1,24 +1,15 @@
 let num1
 let num2
 let operator
+let displayNumber
 
-let button1 = document.getElementById("1")
-let button2 = document.getElementById("2")
-let button3 = document.getElementById("3")
-let button4 = document.getElementById("4")
-let button5 = document.getElementById("5")
-let button6 = document.getElementById("6")
-let button7 = document.getElementById("7")
-let button8 = document.getElementById("8")
-let button9 = document.getElementById("9")
-let buttonAdd = document.getElementById("add")
-let buttonSub = document.getElementById("sub")
-let buttonMul = document.getElementById("mul")
-let buttonDiv = document.getElementById("div")
-let buttonEqual = document.getElementById("equal")
-let buttonClear = document.getElementById("clear")
+let numberButtons = document.querySelectorAll(".number")
+let operatorButtons = document.getElementsByClassName("operator")
+let equalsBtn = document.getElementById("equal")
+let clearBtn = document.getElementById("clear")
 
 let display = document.getElementById("display")
+display.innerHTML = "0"
 
 
 function add(x, y) {
@@ -37,7 +28,7 @@ function divide(x, y) {
     return x / y
 }
 
-function operate(num1, num2, operator) {
+function evaluate(num1, num2, operator) {
     switch(operator) {
         case "+":
             return add(num1, num2)
@@ -54,4 +45,29 @@ function operate(num1, num2, operator) {
     }
 }
 
-console.log(operate(3, 2, "*"))
+function toInt(str) {
+    let num = parseInt(str)
+    return num
+}
+
+numberButtons.forEach(btn => {
+    btn.addEventListener("click", function() {
+        if (display.value === "0") {
+           display.value = toInt(btn.innerHTML) 
+        } else {
+            display.value += toInt(btn.innerHTML)
+        }
+    })
+})
+
+operatorButtons.forEach(btn => {
+    btn.addEventListener("click", function() {
+        num1 = display.value
+        operator = btn.innerHTML
+    }
+})
+
+
+// numberButtons.forEach((button) =>
+//     button.addEventListener('click', () => appendNumber(button.textContent))
+//   )
