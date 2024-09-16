@@ -1,6 +1,37 @@
+input {
+    width: 93px;
+}
+
 #container {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width: 125px;
+    margin: auto;
+    border: 1px solid black;
+}
+
+#displayScreen {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: 125px;
+}
+
+#numBtns {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 75px;
+}
+
+#opBtns {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 50px;
 }
 
 .number {
@@ -10,5 +41,9 @@
 
 .operator {
     width: 25px;
-    height: 50px;
+    height: 38px;
+}
+
+.equal {
+    width: 125px;
 }
